@@ -43,20 +43,28 @@ chosen_book = chosen_book.strip()
 # Parse the url and get the verse
 with open("bom.csv") as books:
     reader = csv.reader(books, delimiter=',')
-    for row in reader:
+    for row in reader:  # Find the chosen book and pick a verse
         if row[0] == chosen_book:
             chapter = random.randrange(1, int(row[2]) + 1)
             chapter_url = url_base + row[1] + "/" + row[2] + "?lang=eng"
+
+            # Get the requested chapter
             res = requests.get(chapter_url)
             html = res.content
             soup = BeautifulSoup(html, "html.parser")
             divs = soup.find_all("div", {"class": "body-block"})
             verses = []
+
+            # Get all the verses
             for div in divs:
                 for verse in div:
                     verses.append(str(verse.get_text()))
+
+            # Pick a random verse
             verse_num = random.randrange(0, len(verses))
             rand_verse = verses[verse_num]
+
+            # Print the random verse to the screen
             print(chosen_book + " " + str(chapter) +
                   ":" + str(verse_num + 1) + "\n")
             print(rand_verse)
