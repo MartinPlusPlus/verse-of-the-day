@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
+"""
+A simple program to get a verse of scripture from churchofjesuschrist.org
+
+Copyright 2021 Martin Eldredge
+Licensed under the MIT License which is included in this project
+"""
 import random
 import time
 import requests
