@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 
 url = "https://www.churchofjesuschrist.org/study/scriptures/bofm?lang=eng"
 url_base = "https://www.churchofjesuschrist.org/study/scriptures/bofm/"
+
 res = requests.get(url)
 html = res.content
 soup = BeautifulSoup(html, "html.parser")
