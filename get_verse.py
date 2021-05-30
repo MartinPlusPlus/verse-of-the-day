@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 url = "https://www.churchofjesuschrist.org/study/scriptures/bofm?lang=eng"
 url_base = "https://www.churchofjesuschrist.org/study/scriptures/bofm/"
 
+# Get html from church website
 res = requests.get(url)
 html = res.content
 soup = BeautifulSoup(html, "html.parser")
@@ -26,17 +27,20 @@ exclude = [
             "Reference Guide to the Book of Mormon"
 ]
 
+# Replace non-breaking space with space
 for li in soup.ul:
     if (li.get_text() not in exclude):
         book_list.append(li.get_text().replace("\xa0", " "))
 
 book_amnt = len(book_list)
 
+# Choose a random book
 random.seed()
 randnum = random.randrange(1, book_amnt + 1)
 chosen_book = book_list[randnum - 1]
 chosen_book = chosen_book.strip()
 
+# Parse the url and get the verse
 with open("bom.csv") as books:
     reader = csv.reader(books, delimiter=',')
     for row in reader:
