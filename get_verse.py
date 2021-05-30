@@ -57,6 +57,7 @@ with open("bom.csv") as books:
                     verses.append(str(verse.get_text()))
             verse_num = random.randrange(0, len(verses))
             rand_verse = verses[verse_num]
-            print(chosen_book + " " + str(chapter) + ":" + str(verse_num + 1) + "\n")
+            print(chosen_book + " " + str(chapter) +
+                  ":" + str(verse_num + 1) + "\n")
             print(rand_verse)
             print("\n" + chapter_url)
