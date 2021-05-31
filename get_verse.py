@@ -15,13 +15,16 @@ from bs4 import BeautifulSoup
 csv_file = ""
 scrip_route = ""
 
-scrip_num = random.randrange(2)
+scrip_num = random.randrange(3)
 if scrip_num == 0:
     csv_file = "bom.csv"
     scrip_route = "bofm"
-else:
+elif scrip_num == 1:
     csv_file = "newt.csv"
     scrip_route = "nt"
+else:
+    csv_file = "oldt.csv"
+    scrip_route = "ot"
 
 url = "https://www.churchofjesuschrist.org/study/scriptures/" + scrip_route + "?lang=eng"
 url_base = "https://www.churchofjesuschrist.org/study/scriptures/" + scrip_route + "/"
