@@ -12,8 +12,19 @@ import requests
 import csv
 from bs4 import BeautifulSoup
 
-url = "https://www.churchofjesuschrist.org/study/scriptures/bofm?lang=eng"
-url_base = "https://www.churchofjesuschrist.org/study/scriptures/bofm/"
+csv_file = ""
+scrip_route = ""
+
+scrip_num = random.randrange(2)
+if scrip_num == 0:
+    csv_file = "bom.csv"
+    scrip_route = "bofm"
+else:
+    csv_file = "newt.csv"
+    scrip_route = "nt"
+
+url = "https://www.churchofjesuschrist.org/study/scriptures/" + scrip_route + "?lang=eng"
+url_base = "https://www.churchofjesuschrist.org/study/scriptures/" + scrip_route + "/"
 
 # Get html from church website
 res = requests.get(url)
@@ -22,9 +33,11 @@ soup = BeautifulSoup(html, "html.parser")
 
 book_list = []
 exclude = [
-            "Contents", "Introduction and Witnesses  ",
+            "Contents",
+            "Introduction and Witnesses  ",
             "Book of Mormon Pronunciation Guide",
-            "Reference Guide to the Book of Mormon"
+            "Reference Guide to the Book of Mormon",
+            "Title Page"
 ]
 
 # Replace non-breaking space with space
@@ -41,12 +54,12 @@ chosen_book = book_list[randnum - 1]
 chosen_book = chosen_book.strip()
 
 # Parse the url and get the verse
-with open("bom.csv") as books:
+with open(csv_file) as books:
     reader = csv.reader(books, delimiter=',')
     for row in reader:  # Find the chosen book and pick a verse
         if row[0] == chosen_book:
             chapter = random.randrange(1, int(row[2]) + 1)
-            chapter_url = url_base + row[1] + "/" + row[2] + "?lang=eng"
+            chapter_url = url_base + row[1] + "/" + str(chapter) + "?lang=eng"
 
             # Get the requested chapter
             res = requests.get(chapter_url)
