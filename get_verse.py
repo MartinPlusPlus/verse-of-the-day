@@ -81,12 +81,15 @@ with open(csv_file) as books:
             # Get all the verses
             for p in divs:
                 for verse in p:
-                    if verse.get_text() != ("\n" or ""):
+                    if verse.get_text() not in ("", "\n"):
                         verses.append(str(verse.get_text()))
 
             # Pick a random verse
             verse_num = random.randrange(0, len(verses))
             rand_verse = verses[verse_num]
+
+            # Remove verse number
+            rand_verse = " ".join(rand_verse.split()[1:])
 
             # Print the random verse to the screen
             print(chosen_book + " " + str(chapter) +
