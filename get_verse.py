@@ -12,21 +12,28 @@ import requests
 import csv
 from bs4 import BeautifulSoup
 
+scriptures = {
+    "bom": "scriptures/bom.csv",
+    "ot": "scriptures/oldt.csv",
+    "nt": "scriptures/newt.csv"
+}
+
 csv_file = ""
 scrip_route = ""
 
 scrip_num = random.randrange(3)
 if scrip_num == 0:
-    csv_file = "bom.csv"
+    csv_file = scriptures["bom"]
     scrip_route = "bofm"
 elif scrip_num == 1:
-    csv_file = "newt.csv"
+    csv_file = scriptures["nt"]
     scrip_route = "nt"
 else:
-    csv_file = "oldt.csv"
+    csv_file = scriptures["ot"]
     scrip_route = "ot"
 
-url = "https://www.churchofjesuschrist.org/study/scriptures/" + scrip_route + "?lang=eng"
+url = "https://www.churchofjesuschrist.org/study/scriptures/" + \
+    scrip_route + "?lang=eng"
 url_base = "https://www.churchofjesuschrist.org/study/scriptures/" + scrip_route + "/"
 
 # Get html from church website
@@ -36,11 +43,11 @@ soup = BeautifulSoup(html, "html.parser")
 
 book_list = []
 exclude = [
-            "Contents",
-            "Introduction and Witnesses  ",
-            "Book of Mormon Pronunciation Guide",
-            "Reference Guide to the Book of Mormon",
-            "Title Page"
+    "Contents",
+    "Introduction and Witnesses  ",
+    "Book of Mormon Pronunciation Guide",
+    "Reference Guide to the Book of Mormon",
+    "Title Page"
 ]
 
 # Replace non-breaking space with space
