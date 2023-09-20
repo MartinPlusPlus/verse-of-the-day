@@ -85,14 +85,15 @@ with open(csv_file) as books:
                         verses.append(str(verse.get_text()))
 
             # Pick a random verse
-            verse_num = random.randrange(0, len(verses))
-            rand_verse = verses[verse_num]
+            verse_num = random.randrange(1, len(verses) + 1)
+            rand_verse = verses[verse_num - 1]
 
             # Remove verse number
             rand_verse = " ".join(rand_verse.split()[1:])
 
+            verse_num = str(verse_num)
+
             # Print the random verse to the screen
-            print(chosen_book + " " + str(chapter) +
-                  ":" + str(verse_num + 1) + "\n")
-            print("\"" + rand_verse + "\"")
-            print("\n" + chapter_url)
+            print(f"{chosen_book} {chapter}:{verse_num}\n")
+            print(f"\"{rand_verse}\"")
+            print(f"\n{chapter_url}&id=p{verse_num}#p{verse_num}")
