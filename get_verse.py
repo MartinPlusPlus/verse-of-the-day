@@ -10,26 +10,29 @@ Licensed under the MIT License which is included in this project
 import random
 import requests
 import csv
+import os
 from bs4 import BeautifulSoup
 
 scriptures = {
-    "bom": "scriptures/bom.csv",
-    "ot": "scriptures/oldt.csv",
-    "nt": "scriptures/newt.csv"
+    "bom": "/scriptures/bom.csv",
+    "ot": "/scriptures/oldt.csv",
+    "nt": "/scriptures/newt.csv"
 }
 
 csv_file = ""
 scrip_route = ""
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
 
 scrip_num = random.randrange(3)
 if scrip_num == 0:
-    csv_file = scriptures["bom"]
+    csv_file = dname + scriptures["bom"]
     scrip_route = "bofm"
 elif scrip_num == 1:
-    csv_file = scriptures["nt"]
+    csv_file = dname + scriptures["nt"]
     scrip_route = "nt"
 else:
-    csv_file = scriptures["ot"]
+    csv_file = dname + scriptures["ot"]
     scrip_route = "ot"
 
 url = "https://www.churchofjesuschrist.org/study/scriptures/" + \
