@@ -63,8 +63,7 @@ book_amnt = len(book_list)
 # Choose a random book
 random.seed()
 randnum = random.randrange(1, book_amnt + 1)
-chosen_book = book_list[randnum - 1]
-chosen_book = chosen_book.strip()
+chosen_book = book_list[randnum - 1].strip()
 
 # Parse the url and get the verse
 with open(csv_file) as books:
